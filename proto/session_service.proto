@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option go_package = "github.com/richard-ramos/komainu/proto";
+
+import "google/protobuf/empty.proto";
+
+message LoginRequest {
+  string user_id = 1;
+  string password = 2;
+}
+
+message LoginResponse { string access_token = 1; }
+
+service SessionService {
+  rpc Login(LoginRequest) returns (LoginResponse) {};
+  rpc Logout(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+}
