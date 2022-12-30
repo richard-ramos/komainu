@@ -6,6 +6,7 @@ import (
 	"crypto/rand"
 
 	"github.com/google/uuid"
+	"github.com/richard-ramos/komainu/pkg/persistence/sqlcipher"
 )
 
 type Keypair struct {
@@ -14,11 +15,12 @@ type Keypair struct {
 }
 
 type Account struct {
-	id      string
-	keypair Keypair
+	ID            string
+	KDFIterations int
+	Keypair       Keypair
 }
 
-func NewAccount(privateKey []byte) (Account, error) {
+func NewAccount(id string, privateKey []byte) (Account, error) {
 	var err error
 	var keypair Keypair
 
@@ -35,13 +37,17 @@ func NewAccount(privateKey []byte) (Account, error) {
 		}
 	}
 
-	uuid, err := uuid.NewRandom()
-	if err != nil {
-		return Account{}, err
+	if id == "" {
+		uuid, err := uuid.NewRandom()
+		if err != nil {
+			return Account{}, err
+		}
+		id = uuid.String()
 	}
 
 	return Account{
-		id:      uuid.String(),
-		keypair: keypair,
+		ID:            id,
+		Keypair:       keypair,
+		KDFIterations: sqlcipher.DefaultKDFIterations,
 	}, nil
 }

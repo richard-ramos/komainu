@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/richard-ramos/komainu/proto"
+	"github.com/richard-ramos/komainu/pkg/proto"
 )
 
 type Service1 struct {

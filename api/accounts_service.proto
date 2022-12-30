@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "github.com/richard-ramos/komainu/proto";
+
+import "google/protobuf/empty.proto";
+
+message NewAccountRequest {
+  string password = 1;
+}
+
+message NewAccountResponse { 
+  string user_id = 1;
+}
+
+message DeleteAccountRequest {
+    string user_id = 1;
+}
+
+service AccountsService {
+  rpc Create(NewAccountRequest) returns (NewAccountResponse) {};
+  rpc Delete(DeleteAccountRequest) returns (google.protobuf.Empty) {};
+}

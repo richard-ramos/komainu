@@ -29,9 +29,9 @@ lint:
 	@golangci-lint --exclude=SA1019 run ./... --deadline=5m
 
 generate:
-	${GOBIN} generate ./proto/generate.go
-	${GOBIN} generate ./persistence/sqlcipher/sql/doc.go
-	${GOBIN} generate ./persistence/sqlite/sql/doc.go
+	${GOBIN} generate ./api/generate.go
+	${GOBIN} generate ./pkg/persistence/sqlcipher/sql/doc.go
+	${GOBIN} generate ./pkg/persistence/sqlite/sql/doc.go
 
 tests:
 	${GOBIN} run test/*.go

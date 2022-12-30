@@ -8,9 +8,10 @@ import (
 	"log"
 	"time"
 
-	"github.com/richard-ramos/komainu/certs"
-	"github.com/richard-ramos/komainu/proto"
-	"github.com/richard-ramos/komainu/services"
+	"github.com/richard-ramos/komainu/pkg/certs"
+	"github.com/richard-ramos/komainu/pkg/config"
+	"github.com/richard-ramos/komainu/pkg/proto"
+	"github.com/richard-ramos/komainu/pkg/services"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
 	"google.golang.org/protobuf/types/known/emptypb"
@@ -18,7 +19,7 @@ import (
 
 func main() {
 	go func() {
-		services.App().Run()
+		services.App(&config.Config{}).Run()
 	}()
 
 	time.Sleep(1 * time.Second)
@@ -66,6 +67,12 @@ func main() {
 	client := proto.NewChatServiceClient(conn1)
 	result2, err := client.GetAllUsers(context.Background(), &proto.Empty{})
 	fmt.Println(result2, err)
+
+	client5 := proto.NewAccountsServiceClient(conn1)
+	result3, err := client5.Create(context.Background(), &proto.NewAccountRequest{
+		Password: "ABC",
+	})
+	fmt.Println("====================================", result3, err)
 
 	fmt.Println("LOGOUT")
 	client4 := proto.NewSessionServiceClient(conn1)

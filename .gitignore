@@ -1,5 +1,6 @@
 bindata.go
 *.pb.go
+/build/*
 
 # sqlite db
 *.db

@@ -1,0 +1,5 @@
+CREATE TABLE accounts (
+    id VARCHAR PRIMARY KEY,
+    kdfIterations INTEGER
+) WITHOUT ROWID;
+-- TODO

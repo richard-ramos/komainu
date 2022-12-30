@@ -6,8 +6,6 @@ import (
 	bindata "github.com/golang-migrate/migrate/v4/source/go_bindata"
 )
 
-const tbl_prefix = "komainu_"
-
 type assetFn = func(name string) ([]byte, error)
 type assets = []string
 
